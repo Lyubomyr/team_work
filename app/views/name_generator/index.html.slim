@@ -1,0 +1,14 @@
+.col-md-12
+  h1 Name Generator
+
+  = form_tag name_generator_generate_path, remote: true do
+    - (1..2).each do |time|
+      .col-md-6
+        .field
+          = label :column_names, "column_#{time}"
+          br
+          = text_area :column_names, :list, name: "list[]", rows: "20"
+    .actions= submit_tag "Generate"
+
+.col-md-12
+  p.generated_names style="white-space: pre-wrap;"

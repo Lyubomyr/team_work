@@ -20,6 +20,8 @@ Rails.application.routes.draw do
        #match "attachments/:id" => "attachment#download", as: :download, via: [:get, :post]
       end
     end
+    get "/name_generator" => "name_generator#index"
+    post "/name_generator" => "name_generator#generate", as: :name_generator_generate
 
     namespace :system_admin do
       resources :organizations
