@@ -17,8 +17,8 @@ javascript:
   $(function(){
     (function worker() {
       $.post("/update_domains", $("#name_generator").serialize(), function(data) {
-
+        console.log(data);
       });
-      setTimeout(worker, 5000);
+      setTimeout(worker, 10000);
     })();
   });
