@@ -21,7 +21,7 @@ class NameGeneratorController < ApplicationController
       generate_names
       gnames = NameGeneration.where(name: @result)
       gnames.each do |g|
-        result << g.domains_info.presence || g.name if g
+        result.push(g.domains_info || g.name) if g
       end
     end
     @generated_names = result.compact.join("\r\n")
