@@ -1,21 +1,38 @@
 class NameGeneratorController < ApplicationController
   skip_before_action :authenticate_user!
+
   def index
   end
 
   def generate
-    res = []
-    lists = params[:list].map{|l| l.split("\r\n")}.reject { |c| c.empty? }.map{|l| l.map{|l| l.strip.humanize} }
-    result = lists[0].product(lists[1])
-    result += lists[1].product(lists[0])
-    result = result.map{|r| r.join }.uniq
-    result.each do |r|
-      com_response = JSON.parse(RestClient::Resource.new("http://whoiz.herokuapp.com/lookup.json?url=#{r}.com").get)
-      com_aval = com_response.try(:[], "available?")
-      net_response = JSON.parse(RestClient::Resource.new("http://whoiz.herokuapp.com/lookup.json?url=#{r}.net").get)
-      net_aval = net_response.try(:[], "available?")
-      res << "#{r} : com - #{com_aval}  net - #{net_aval}"
+    generate_names
+    @result.each do |r|
+      NameGeneration.create name: r
     end
-    @generated_names = res.join("\r\n")
+    CheckDomainsWorker.perform_async(@result)
+    render nothing: true
+  end
+
+  def update_domains
+    result = []
+    @generated_names = ""
+    list = params[:list].reject { |c| c.empty? }
+    if list.present? && list.count > 1
+      generate_names
+      gnames = NameGeneration.where(name: @result)
+      gnames.each do |g|
+        result << g.domains_info.presence || g.name if g
+      end
+    end
+    @generated_names = result.compact.join("\r\n")
+  end
+
+  private
+
+  def generate_names
+    lists = params[:list].map{|l| l.split("\r\n")}.reject { |c| c.empty? }.map{|l| l.map{|l| l.strip.humanize} }
+    @result = lists[0].product(lists[1])
+    @result += lists[1].product(lists[0])
+    @result = @result.map{|r| r.join }.uniq
   end
 end

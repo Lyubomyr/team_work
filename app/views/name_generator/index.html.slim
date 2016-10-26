@@ -1,7 +1,7 @@
 .col-md-12
   h1 Name Generator
 
-  = form_tag name_generator_generate_path, remote: true do
+  = form_tag name_generator_generate_path, id: :name_generator, remote: true do
     - (1..2).each do |time|
       .col-md-6
         .field
@@ -12,3 +12,13 @@
 
 .col-md-12
   p.generated_names style="white-space: pre-wrap;"
+
+javascript:
+  $(function(){
+    (function worker() {
+      $.post("/update_domains", $("#name_generator").serialize(), function(data) {
+
+      });
+      setTimeout(worker, 5000);
+    })();
+  });

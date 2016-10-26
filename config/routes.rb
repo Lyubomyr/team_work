@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     end
     get "/name_generator" => "name_generator#index"
     post "/name_generator" => "name_generator#generate", as: :name_generator_generate
+    post "/update_domains" => "name_generator#update_domains", as: :name_generator_update_domains
 
     namespace :system_admin do
       resources :organizations
