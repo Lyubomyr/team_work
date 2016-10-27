@@ -1,4 +1,8 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+  authenticate :user, lambda { |u| u.system_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   mount Ckeditor::Engine => '/ckeditor'
   # devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
