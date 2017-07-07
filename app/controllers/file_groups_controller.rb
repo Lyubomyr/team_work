@@ -1,0 +1,2 @@
+class FileGroupsController < ApplicationController
+end
