@@ -46,7 +46,9 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :file_groups
+      resources :file_groups do
+        resources :documents
+      end
 
       get '/' => 'pages#index'
     end

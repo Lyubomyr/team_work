@@ -1,0 +1,51 @@
+<p>
+  <strong>Name:</strong>
+  <%= @file_group.name %>
+</p>
+
+<p>
+  <strong>description:</strong>
+  <%= @file_group.description %>
+</p>
+
+<p>
+  <strong>position:</strong>
+  <%= @file_group.position %>
+</p>
+<% if @file_group.documents.present? %>
+  <h2>Document</h2>
+  <% @file_group.documents.each do |document| %>
+    <p>
+      <strong>Document title:</strong>
+      <%= document.name %>
+    </p>
+
+    <p>
+      <strong>Document position:</strong>
+      <%= document.position %>
+    </p>
+  <% end %>
+<% end %>
+
+
+<h2>Add a document:</h2>
+<%= form_for([:organization_admin, @file_group, @file_group.documents.build]) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :file %><br>
+    <%= f.file_field :file %>
+  </p>
+  <p>
+    <%= f.label :position %><br>
+    <%= f.number_field :position %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit Post Group', edit_organization_admin_file_group_path(@file_group) %> |
+<%= link_to 'Back', organization_admin_file_groups_path %>

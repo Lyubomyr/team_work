@@ -16,6 +16,7 @@
         <td><%= file_group.name %></td>
         <td><%= file_group.description %></td>
         <td><%= file_group.position %></td>
+        <td><%= link_to 'Show', organization_admin_file_group_path(file_group) %></td>
         <td><%= link_to 'Edit', edit_organization_admin_file_group_path(file_group) %></td>
         <td><%= link_to 'Destroy', [:organization_admin, file_group], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

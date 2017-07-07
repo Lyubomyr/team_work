@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170707082921) do
+ActiveRecord::Schema.define(version: 20170707121747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 20170707082921) do
   end
 
   add_index "comments", ["owner_id"], name: "index_comments_on_owner_id", using: :btree
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "file"
+    t.integer  "position"
+    t.integer  "file_group_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "documents", ["file_group_id"], name: "index_documents_on_file_group_id", using: :btree
 
   create_table "file_groups", force: :cascade do |t|
     t.string   "name"
@@ -221,6 +232,7 @@ ActiveRecord::Schema.define(version: 20170707082921) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "documents", "file_groups"
   add_foreign_key "identities", "users"
   add_foreign_key "user_profiles", "users"
 end
