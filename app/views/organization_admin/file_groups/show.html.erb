@@ -16,20 +16,27 @@
   <h2>Document</h2>
   <% @file_group.documents.each do |document| %>
     <p>
-      <strong>Document title:</strong>
+      <strong>Document name:</strong>
       <%= document.name %>
+    </p>
+
+    <p>
+      <strong>Document:</strong>
+      <%= file_field_tag (document.file), :accept => 'image/jpeg', :multiple => true %>
     </p>
 
     <p>
       <strong>Document position:</strong>
       <%= document.position %>
     </p>
+    <br>
   <% end %>
 <% end %>
 
 
+
 <h2>Add a document:</h2>
-<%= form_for([:organization_admin, @file_group, @file_group.documents.build]) do |f| %>
+<%= form_for([:organization_admin, @file_group, @file_group.documents.build], html: { multipart: true }) do |f| %>
   <p>
     <%= f.label :name %><br>
     <%= f.text_field :name %>

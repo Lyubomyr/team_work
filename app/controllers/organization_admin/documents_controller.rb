@@ -8,7 +8,7 @@ class OrganizationAdmin::DocumentsController < OrganizationAdmin::AdminControlle
 
   private
     def document_params
-      params.require(:document).permit(:name, :position)
+      params.require(:document).permit(:name, :file, :position)
     end
 
 end
