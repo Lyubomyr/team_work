@@ -22,12 +22,17 @@
 
     <p>
       <strong>Document:</strong>
-      <%= image_tag(document.file) %>
+      <%= document.file %>
     </p>
 
     <p>
       <strong>Document position:</strong>
       <%= document.position %>
+    </p>
+    <br>
+
+    <p>
+      <%= link_to "Delete", [:organization_admin, @file_group, document], method: :delete, data: { confirm: 'Are you sure?' } %>
     </p>
     <br>
   <% end %>
