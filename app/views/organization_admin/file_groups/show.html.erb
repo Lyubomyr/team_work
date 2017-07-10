@@ -32,6 +32,11 @@
     <br>
 
     <p>
+      <%= link_to "Download", [:organization_admin, @file_group, document] %>
+    </p>
+    <br>
+
+    <p>
       <%= link_to "Delete", [:organization_admin, @file_group, document], method: :delete, data: { confirm: 'Are you sure?' } %>
     </p>
     <br>
