@@ -15,6 +15,7 @@
           = active_link_to page.title , page_path(page.url) if page.visible?
         - if user_signed_in?
           = active_link_to t('layouts.top_navigation.campaigns'), campaigns_path
+          = active_link_to t('layouts.top_navigation.file_groups'), file_groups_path
           = active_link_to t('layouts.top_navigation.reports'), reports_path
           -# = active_link_to t('layouts.top_navigation.news'), novelties_path
           -# = active_link_to t('layouts.top_navigation.projects'), projects_path

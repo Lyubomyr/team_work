@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :reports
     resources :novelties,:path => "/news", only: [:index, :show]
     resources :pages, param: :url,only: [:index, :show]
+    resources :file_groups do
+      resources :documents
+    end
     resources :projects do
       resources :comments, only: [:new, :create, :destroy]
       resources :attachments, only: [:create, :destroy] do

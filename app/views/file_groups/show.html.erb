@@ -1,0 +1,41 @@
+<p>
+  <strong>Name:</strong>
+  <%= @file_group.name %>
+</p>
+
+<p>
+  <strong>description:</strong>
+  <%= @file_group.description %>
+</p>
+
+<p>
+  <strong>position:</strong>
+  <%= @file_group.position %>
+</p>
+<% if @file_group.documents.present? %>
+  <h2>Document</h2>
+  <% @file_group.documents.each do |document| %>
+    <p>
+      <strong>Document name:</strong>
+      <%= document.name %>
+    </p>
+
+    <p>
+      <strong>Document:</strong>
+      <%= document.file %>
+    </p>
+
+    <p>
+      <strong>Document position:</strong>
+      <%= document.position %>
+    </p>
+    <br>
+
+     <p>
+       <%= link_to 'Download', document.file.url(:original, false), target: '_blank' %>
+     </p>
+    <br>
+  <% end %>
+<% end %>
+<br>
+<%= link_to 'Back', file_groups_path %>
