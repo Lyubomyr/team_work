@@ -31,9 +31,9 @@
     </p>
     <br>
 
-    <p>
-      <%= link_to "Download", [:organization_admin, @file_group, document] %>
-    </p>
+     <p>
+       <%= link_to 'Download', document.file.url(:original, false), target: '_blank' %>
+     </p>
     <br>
 
     <p>
