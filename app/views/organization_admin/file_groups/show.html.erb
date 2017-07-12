@@ -1,43 +1,43 @@
 <p>
-  <strong>Name:</strong>
+  <strong><%= t('group.name') %>:</strong>
   <%= @file_group.name %>
 </p>
 
 <p>
-  <strong>description:</strong>
+  <strong><%= t('group.description') %>:</strong>
   <%= @file_group.description %>
 </p>
 
 <p>
-  <strong>position:</strong>
+  <strong><%= t('group.position') %>:</strong>
   <%= @file_group.position %>
 </p>
 <% if @file_group.documents.present? %>
-  <h2>Document</h2>
+  <h2><%= t('document.title') %></h2>
   <% @file_group.documents.each do |document| %>
     <p>
-      <strong>Document name:</strong>
+      <strong><%= t('document.name') %>:</strong>
       <%= document.name %>
     </p>
 
     <p>
-      <strong>Document:</strong>
+      <strong><%= t('document.file') %>:</strong>
       <%= document.file %>
     </p>
 
     <p>
-      <strong>Document position:</strong>
+      <strong><%= t('document.position') %>:</strong>
       <%= document.position %>
     </p>
     <br>
 
      <p>
-       <%= link_to 'Download', document.file.url(:original, false), target: '_blank' %>
+       <%= link_to t('document.link_download'), document.file.url(:original, false), target: '_blank' %>
      </p>
     <br>
 
     <p>
-      <%= link_to "Delete", [:organization_admin, @file_group, document], method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to t('index.destroy'), [:organization_admin, @file_group, document], method: :delete, data: { confirm: 'Are you sure?' } %>
     </p>
     <br>
   <% end %>
@@ -45,24 +45,25 @@
 
 
 
-<h2>Add a document:</h2>
+<h2><%= t('document.add') %>:</h2>
 <%= form_for([:organization_admin, @file_group, @file_group.documents.build], html: { multipart: true }) do |f| %>
   <p>
-    <%= f.label :name %><br>
+    <%= f.label t('document.name') %><br>
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :file %><br>
+    <%= f.label t('document.file') %><br>
     <%= f.file_field :file %>
   </p>
   <p>
-    <%= f.label :position %><br>
+    <%= f.label t('document.position') %><br>
     <%= f.number_field :position %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit t('document.submit')%>
   </p>
 <% end %>
-
-<%= link_to 'Edit Post Group', edit_organization_admin_file_group_path(@file_group) %> |
-<%= link_to 'Back', organization_admin_file_groups_path %>
+<br>
+<br>
+<br>
+<%= link_to t('document.link_back'), organization_admin_file_groups_path %>
