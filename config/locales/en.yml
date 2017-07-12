@@ -233,10 +233,13 @@ en:
 
   file_groups:
     h1: "Listing File Groups"
+    new: "New File Group"
+    edit: "Edit File Group"
   group:
     name: "Name"
     description: "Description"
     position: "Position"
+    submit: "Create File Group"
   index:
     show: "Show"
     edit: "Edit"

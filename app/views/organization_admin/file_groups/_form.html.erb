@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label t('group.name') %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label t('group.description') %><br>
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :position %><br>
+    <%= f.label t('group.position') %><br>
     <%= f.number_field :position %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t('group.submit')%>
   </div>
 <% end %>
