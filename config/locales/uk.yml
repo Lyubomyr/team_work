@@ -254,3 +254,43 @@ uk:
       long: "%d %B %Y, %H:%M"
       short: "%d %b, %H:%M"
     pm: по полудні
+
+
+
+  file_groups:
+    h1: "Список груп файлів"
+    new: "Нова група файлів"
+    edit: "Редагувати Групу Файлів"
+  group:
+    name: "Назва групи файлів"
+    description: "Опис"
+    position: "Позиція"
+    submit: "Створити Групу Файлів"
+  index:
+    show: "Показати"
+    edit: "Редагувати"
+    destroy: "Видалити"
+  link:
+    create: "Створити нову Файлову Групу"
+    back: "Назад"
+
+  document:
+    title: "Файли"
+    name: "Назва файлу"
+    file: "Файл"
+    position: "Позиція файлу"
+    link_download: "Завантажити"
+    link_edit: "Редагувати"
+    link_back: "Назад"
+    add: "Добавити документ"
+    submit: "Створити Документ"
+
+
+
+
+
+
+
+
+
+

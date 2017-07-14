@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026171544) do
+ActiveRecord::Schema.define(version: 20170714064946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace"
+    t.text     "body"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
     t.string   "attachment_file_name"
@@ -65,6 +80,52 @@ ActiveRecord::Schema.define(version: 20161026171544) do
   end
 
   add_index "comments", ["owner_id"], name: "index_comments_on_owner_id", using: :btree
+
+  create_table "document_translations", force: :cascade do |t|
+    t.integer  "document_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+  end
+
+  add_index "document_translations", ["document_id"], name: "index_document_translations_on_document_id", using: :btree
+  add_index "document_translations", ["locale"], name: "index_document_translations_on_locale", using: :btree
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "file"
+    t.integer  "position"
+    t.integer  "file_group_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "documents", ["file_group_id"], name: "index_documents_on_file_group_id", using: :btree
+
+  create_table "file_group_translations", force: :cascade do |t|
+    t.integer  "file_group_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "name"
+    t.string   "description"
+  end
+
+  add_index "file_group_translations", ["file_group_id"], name: "index_file_group_translations_on_file_group_id", using: :btree
+  add_index "file_group_translations", ["locale"], name: "index_file_group_translations_on_locale", using: :btree
+
+  create_table "file_groups", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "position"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -164,6 +225,24 @@ ActiveRecord::Schema.define(version: 20161026171544) do
     t.integer "role",       default: 0
   end
 
+  create_table "system_admins", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "system_admins", ["email"], name: "index_system_admins_on_email", unique: true, using: :btree
+  add_index "system_admins", ["reset_password_token"], name: "index_system_admins_on_reset_password_token", unique: true, using: :btree
+
   create_table "user_profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "first_name"
@@ -213,6 +292,7 @@ ActiveRecord::Schema.define(version: 20161026171544) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "documents", "file_groups"
   add_foreign_key "identities", "users"
   add_foreign_key "user_profiles", "users"
 end

@@ -228,3 +228,46 @@ en:
       long: "%B %d, %Y %I:%M %p"
       short: "%d %b %I:%M %p"
     pm: pm
+
+
+
+  file_groups:
+    h1: "Listing File Groups"
+    new: "New File Group"
+    edit: "Edit File Group"
+  group:
+    name: "File Group Name"
+    description: "Description"
+    position: "Position"
+    submit: "Create File Group"
+  index:
+    show: "Show"
+    edit: "Edit"
+    destroy: "Delete"
+  link:
+    create: "Create new File Group"
+    back: "Back"
+
+  document:
+    title: "Files"
+    name: "File name"
+    file: "File"
+    position: "File position"
+    link_download: "Download"
+    link_edit: "Edit"
+    link_back: "Back"
+    add: "Add a document"
+    submit: "Create Document"
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -30,5 +30,7 @@ module TeamWork
 
     # Use lib/core_ext folder for core class extensions
     Dir[File.join(Rails.root, "lib", "core_ext", "*.rb")].each {|l| require l }
+
+    config.i18n.fallbacks = true
   end
 end
