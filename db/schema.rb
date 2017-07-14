@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714053819) do
+ActiveRecord::Schema.define(version: 20170714064946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,17 @@ ActiveRecord::Schema.define(version: 20170714053819) do
   end
 
   add_index "comments", ["owner_id"], name: "index_comments_on_owner_id", using: :btree
+
+  create_table "document_translations", force: :cascade do |t|
+    t.integer  "document_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+  end
+
+  add_index "document_translations", ["document_id"], name: "index_document_translations_on_document_id", using: :btree
+  add_index "document_translations", ["locale"], name: "index_document_translations_on_locale", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.string   "name"

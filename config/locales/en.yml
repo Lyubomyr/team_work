@@ -236,7 +236,7 @@ en:
     new: "New File Group"
     edit: "Edit File Group"
   group:
-    name: "Name"
+    name: "File Group Name"
     description: "Description"
     position: "Position"
     submit: "Create File Group"
@@ -254,7 +254,8 @@ en:
     file: "File"
     position: "File position"
     link_download: "Download"
-    linl_back: "Back"
+    link_edit: "Edit"
+    link_back: "Back"
     add: "Add a document"
     submit: "Create Document"
 

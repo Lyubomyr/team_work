@@ -1,41 +1,41 @@
-<p>
-  <strong><%= t 'group.name' %>:</strong>
-  <%= @file_group.name %>
-</p>
+<h2>
+  <%= t('group.name') %>:
+  <strong><%= @file_group.name %></strong>
+</h2>
 
-<p>
-  <strong><%= t 'group.description' %>:</strong>
+<h4>
+  <strong><%= t('group.description') %>:</strong>
   <%= @file_group.description %>
-</p>
+</h4>
 
 <p>
-  <strong><%= t 'group.position' %>:</strong>
+  <strong><%= t('group.position') %>:</strong>
   <%= @file_group.position %>
 </p>
+<br>
+<br>
 <% if @file_group.documents.present? %>
-  <h2><%= t 'document.title' %></h2>
-  <% @file_group.documents.each do |document| %>
-    <p>
-      <strong><%= t 'document.name' %>:</strong>
-      <%= document.name %>
-    </p>
+  <h2><%= t('document.title') %></h2>
 
-    <p>
-      <strong><%= t 'document.file' %>:</strong>
-      <%= document.file %>
-    </p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= t('document.name') %></th>
+        <th><%= t('document.position') %></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-    <p>
-      <strong><%= t 'document.position' %>:</strong>
-      <%= document.position %>
-    </p>
-    <br>
-
-     <p>
-       <%= link_to t("document.link_download"), document.file.url(:original, false), target: '_blank' %>
-     </p>
-    <br>
-  <% end %>
+    <tbody>
+      <% @file_group.documents.each do |document| %>
+        <tr>
+          <td><%= document.name %></td>
+          <td><%= document.position %></td>
+          <td><%= link_to t('document.link_download'), document.file.url(:original, false), target: '_blank' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
 <br>
 <%= link_to t('document.link_back'), file_groups_path %>

@@ -1,0 +1,17 @@
+<%= form_for([:organization_admin, @file_group, @document], html: { multipart: true }) do |f| %>
+  <p>
+    <%= f.label t('document.name') %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label t('document.file') %><br>
+    <%= f.file_field :file %>
+  </p>
+  <p>
+    <%= f.label t('document.position') %><br>
+    <%= f.number_field :position %>
+  </p>
+  <p>
+    <%= f.submit t('document.submit')%>
+  </p>
+<% end %>

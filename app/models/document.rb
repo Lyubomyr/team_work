@@ -6,6 +6,8 @@ class Document < ActiveRecord::Base
                     :path => ":rails_root/public/assets/products/:basename.:extension"
   validates_attachment :file, :content_type => { :content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document) }
 
+  validates_presence_of :name, :file
+
   translates :name
 
 end
